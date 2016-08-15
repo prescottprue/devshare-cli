@@ -1,0 +1,55 @@
+{
+  "name": "devshare-cli",
+  "version": "0.0.1",
+  "description": "Command line interface for devshare",
+  "main": "lib/index.js",
+  "jsnext:main": "src/index.js",
+  "files": [
+    "src",
+    "dist",
+    "lib"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "npm run lint -- --fix",
+    "clean": "rimraf lib coverage",
+    "test": "mocha -R spec --compilers js:babel-core/register ./test/setup.js ./test/**/*.spec.js",
+    "test:cov": "babel-node $(npm bin)/isparta cover --report lcov ./node_modules/mocha/bin/_mocha -- ./test --recursive",
+    "build:lib": "babel src --out-dir lib",
+    "build": "npm run clean && npm run build:lib",
+    "watch": "npm run build:lib -- --watch",
+    "prepublish": "npm run clean && npm run test && npm run build",
+    "prepush": "npm run test",
+    "start": "node ./lib/index.js"
+  },
+  "author": "prescottprue",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kypertech/devshare-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kypertech/devshare-cli/issues"
+  },
+  "homepage": "https://github.com/kypertech/devshare-cli",
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "commander": "^2.9.0",
+    "firebase": "^3.2.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.6.5",
+    "babel-core": "^6.7.2",
+    "babel-loader": "^6.2.4",
+    "babel-eslint": "6.0.4",
+    "babel-preset-es2015": "^6.5.0",
+    "chai": "^3.5.0",
+    "eslint": "^2.13.1",
+    "eslint-config-standard": "^5.3.1",
+    "eslint-plugin-babel": "^3.3.0",
+    "eslint-plugin-import": "^1.8.0",
+    "isparta": "^4.0.0",
+    "mocha": "^2.4.5",
+    "rimraf": "^2.5.1"
+  }
+}
